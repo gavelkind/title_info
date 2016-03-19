@@ -1,0 +1,8 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+
+# Decisions
+title_info_show_title_info;Show Title Info;;;;;;;;;x
+title_info_show_title_info_desc;Show the §Yde jure size§! and §Yde jure capital§! of [Root.GetBaseName];;;;;;;;;x
+
+# Events
+TitleInfo.1.desc;We have [Root.title_info_controlled_counties.GetValue] counties in [From.GetBaseName].\n\nWe need [Root.title_info_required_counties.GetValue] ([Root.title_info_required_percent.GetValue]% of [Root.title_info_total_counties.GetValue]).\n\nThe de jure capital is [dejure_capital_target.GetBaseName].;;;;;;;;;x

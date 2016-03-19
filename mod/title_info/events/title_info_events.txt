@@ -1,0 +1,64 @@
+namespace = TitleInfo
+
+character_event = {
+    id = TitleInfo.1
+    desc = TitleInfo.1.desc
+    is_triggered_only = yes
+
+    immediate = {
+        # How many counties are de jure part of FROM, and how many do we control?
+        set_variable = { which = "title_info_total_counties"  value = 0 }
+        set_variable = { which = "title_info_controlled_counties"  value = 0 }
+        FROM = {
+            any_de_jure_vassal_title = {
+                limit = { tier = COUNT }
+
+                # Tick total
+                ROOT = {
+                    change_variable = { which = "title_info_total_counties"  value = 1 }
+                }
+
+                # Tick controlled, if we control it
+                if = {
+                    limit = {
+                        holder_scope = {
+                            OR = {
+                                character = ROOT
+                                is_liege_or_above = ROOT
+                                #is_vassal_or_below = ROOT
+                            }
+                        }
+                    }
+                    ROOT = {
+                        change_variable = { which = "title_info_controlled_counties"  value = 1 }
+                    }
+                }
+            }
+        }
+
+        # What percent are required for creating the title?
+        set_variable = { which = "title_info_required_percent"  value = 51 }
+        if = {
+            limit = { FROM = { tier = EMPEROR } }
+            set_variable = { which = "title_info_required_percent"  value = 80 }
+        }
+
+        # How many counties are needed to create?
+        set_variable =      { which = "title_info_required_counties"  which = "title_info_total_counties" }
+        multiply_variable = { which = "title_info_required_counties"  which = "title_info_required_percent" }
+        divide_variable =   { which = "title_info_required_counties"  value = 100 }
+
+        # What is the de jure capital?
+        FROM = {
+            capital_scope = {
+                county = {
+                    save_event_target_as = dejure_capital_target
+                }
+            }
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}

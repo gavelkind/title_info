@@ -1,0 +1,25 @@
+title_decisions = {
+
+    title_info_show_title_info = {
+        ai_target_filter = owned
+
+        from_potential = {
+            ai = no
+        }
+
+        potential = {
+            higher_tier_than = COUNT
+        }
+
+        allow = {
+            always = yes
+        }
+
+        effect = {
+            FROM = {
+                character_event = { id = TitleInfo.1 }
+            }
+        }
+    }
+
+}
